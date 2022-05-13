@@ -33,7 +33,6 @@ public class ChatController {
     @MessageMapping("/hello")
 //	@SendTo("/topic/greetings")
     public void greeting(@Payload HelloMessage message, @Header("simpSessionId") String sessionId, Principal principal) {
-        System.out.println(principal);
         socketCache.add(message.getName(),
                 principal == null ? null : principal.getName(),
                 sessionId);
@@ -64,8 +63,8 @@ public class ChatController {
         return exception.getMessage();
     }
 
-    @ExceptionHandler({Exception.class})
+/*    @ExceptionHandler({Exception.class})
     public ResponseEntity<String> handleException(Exception ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+    }*/
 }
